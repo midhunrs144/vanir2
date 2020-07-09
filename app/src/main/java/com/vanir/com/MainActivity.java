@@ -1,7 +1,10 @@
 package com.vanir.com;
 
+import android.app.Dialog;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 //import android.graphics.Bitmap;
@@ -29,11 +32,15 @@ public class MainActivity extends AppCompatActivity
 {
     private WebView webview ;
     private String URL = "https://vanir.in";
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dialog = DialogUtilities.showProgressBar(this);
+        dialog.show();
 
         webview =(WebView)findViewById(R.id.webView);
         //webview.setWebViewClient(new CustomWebViewClient());
@@ -45,6 +52,7 @@ public class MainActivity extends AppCompatActivity
 
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setDomStorageEnabled(true);
+        webview.clearCache(true);
         webview.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
         webview.loadUrl(URL);
 
@@ -68,6 +76,7 @@ public class MainActivity extends AppCompatActivity
                 }
 
                 webview.loadUrl("about:blank");
+                dialog.show();
                 if(!isConnected()){
                     AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                     alertDialog.setTitle("Oops");
@@ -87,10 +96,23 @@ public class MainActivity extends AppCompatActivity
                 super.onReceivedError(webview, errorCode, description, failingUrl);
             }
 
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return super.shouldOverrideUrlLoading(view, request);
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                dialog.show();
+                super.onPageStarted(view, url, favicon);
+            }
+
             @Override
             public void onPageFinished(WebView view, String url)
             {
                 //hide loading image
+                dialog.dismiss();
                 findViewById(R.id.imageLoading1).setVisibility(View.GONE);
                 //show webview
                 findViewById(R.id.webView).setVisibility(View.VISIBLE);
