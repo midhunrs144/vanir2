@@ -1,29 +1,31 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.vanir.com.MainActivity">
+    tools:context="com.vanir.com.MainActivity"
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/imageLoading1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/a4"
-        android:src="@drawable/a4"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="220dp"
+        android:background="@color/white"
+        android:src="@drawable/logo"
         android:visibility="visible"
-        android:layout_alignParentLeft="true" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <WebView android:id="@+id/webView"
-        android:layout_height="fill_parent"
-        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
