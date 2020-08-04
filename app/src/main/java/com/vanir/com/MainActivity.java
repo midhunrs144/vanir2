@@ -42,6 +42,14 @@ public class MainActivity extends AppCompatActivity
         dialog = DialogUtilities.showProgressBar(this);
         dialog.show();
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                findViewById(R.id.imageLoading1).setVisibility(View.GONE);
+                findViewById(R.id.webView).setVisibility(View.VISIBLE);
+            }
+        },3500);
+
         webview =(WebView)findViewById(R.id.webView);
         //webview.setWebViewClient(new CustomWebViewClient());
 
