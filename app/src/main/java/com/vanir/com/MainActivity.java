@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         dialog = DialogUtilities.showProgressBar(this);
-        dialog.show();
+        //dialog.show();
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -112,7 +113,10 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                dialog.show();
+                if (!url.equals(URL+"/")){
+                    dialog.show();
+                }
+                Log.d("test34",url);
                 super.onPageStarted(view, url, favicon);
             }
 
